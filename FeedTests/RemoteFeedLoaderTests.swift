@@ -50,7 +50,8 @@ class RemoteFeedLoaderTests: XCTestCase {
         
         samples.enumerated().forEach { index, code in
             expect(sut, toCompleteWith: .failure(.invalidData), when: {
-                client.complete(withStatusCode:code, at:index)
+                let json = makeItemsJSON([])
+                client.complete(withStatusCode:code, data: json, at:index)
             })
         }
     }
@@ -59,7 +60,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
 
         expect(sut, toCompleteWith: .failure(.invalidData), when: {
-            let invalidJSON = Data(bytes: "invalid json".utf8)
+            let invalidJSON = Data("invalid json".utf8)
             client.complete(withStatusCode:200, data: invalidJSON)
         })
     }
@@ -69,7 +70,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let (sut, client) = makeSUT()
 
         expect(sut, toCompleteWith: .success([]), when: {
-            let emptyListJSON = Data(bytes: "{\"items\": []}".utf8)
+            let emptyListJSON = Data("{\"items\": []}".utf8)
             client.complete(withStatusCode: 200, data: emptyListJSON)
         })
     }
@@ -81,14 +82,12 @@ class RemoteFeedLoaderTests: XCTestCase {
           
         let item2 = makeItem(id: UUID(), description: "a description", location: "a location", imageURL: URL(string: "http://another-url.com")!)
         
-        
         let items = [item1.model, item2.model]
         
         expect(sut, toCompleteWith: .success(items), when: {
             let json = makeItemsJSON([item1.json, item2.json])
             client.complete(withStatusCode: 200, data: json)
         })
-        
     }
     
     // MARK: - Helpers
@@ -143,7 +142,7 @@ class RemoteFeedLoaderTests: XCTestCase {
             messages[index].completion(.failure(error))
         }
         
-        func complete(withStatusCode code: Int, data: Data = Data(), at index: Int = 0) {
+        func complete(withStatusCode code: Int, data: Data, at index: Int = 0) {
             let response = HTTPURLResponse(url: requestedURLs[index],
                                            statusCode: code,
                                            httpVersion: nil,
