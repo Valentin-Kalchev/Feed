@@ -34,11 +34,12 @@ class URLSessionHTTPClientTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
-        
         URLProtocolStub.stopInterceptingRequests()
     }
     
-    func test_getFromURL_performansGETRequestWithURL() {
+    func test_getFromURL_performansGETRequestWithURL() { 
+        URLProtocolStub.startInterceptingRequests()
+        
         let url = URL(string: "http://any-url.com")!
         let exp = expectation(description: "Wait for request")
         
@@ -48,9 +49,10 @@ class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        URLSessionHTTPClient().get(from: url) { _ in }
+        makeSUT().get(from: url) { _ in }
         
         wait(for: [exp], timeout: 1.0)
+        URLProtocolStub.stopInterceptingRequests()
     }
     
     func test_getFromURL_failsOnRequestError() {
@@ -59,7 +61,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         
         URLProtocolStub.stub(data: nil, response: nil,  error: error)
         
-        let sut = URLSessionHTTPClient()
+        let sut = makeSUT()
         
         let exp = expectation(description: "Wait for completion")
         sut.get(from: url) { result in
@@ -72,10 +74,16 @@ class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        wait(for: [exp], timeout: 1.0) 
+        wait(for: [exp], timeout: 1.0)
     }
     
     // MARK: - Helpers
+    
+    private func makeSUT() -> URLSessionHTTPClient {
+        let sut = URLSessionHTTPClient()
+        trackForMemoryLeaks(sut)
+        return sut
+    } 
     
     private class URLProtocolStub: URLProtocol {
         private static var stub: Stub?
@@ -97,12 +105,11 @@ class URLSessionHTTPClientTests: XCTestCase {
         
         static func stopInterceptingRequests() {
             URLProtocol.unregisterClass(URLProtocolStub.self)
-            requestObserver = nil
             stub = nil
+            requestObserver = nil
         }
         
         override class func canInit(with request: URLRequest) -> Bool {
-//            guard let url = request.url else { return false }
             requestObserver?(request)
             return true
         }
