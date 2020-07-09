@@ -12,6 +12,11 @@ public class URLSessionHTTPClient: HTTPClient {
     private let session: URLSession
     
     public init(session: URLSession = .shared) {
+//        let configuration = URLSessionConfiguration.default
+//        configuration.waitsForConnectivity = true
+//        configuration.timeoutIntervalForResource = 600
+//        URLSession(configuration: configuration)
+         
         self.session = session
     }
     
