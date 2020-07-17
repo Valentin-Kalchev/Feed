@@ -57,6 +57,5 @@ class CacheFeedUseCaseTests: XCTestCase {
         let sut = LocalFeedLoader(store: store)
         
         return (sut, store)
-    }
-    
+    } 
 }
