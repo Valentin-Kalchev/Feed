@@ -26,6 +26,7 @@
 		E0D684AB24C86F8700F71888 /* RemoteFeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D684AA24C86F8700F71888 /* RemoteFeedItem.swift */; };
 		E0D684AD24C9751600F71888 /* LoadFeedFromCacheUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D684AC24C9751600F71888 /* LoadFeedFromCacheUseCaseTests.swift */; };
 		E0D684B024C9761300F71888 /* FeedStoreSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D684AF24C9761300F71888 /* FeedStoreSpy.swift */; };
+		E0D684B224C9BAC400F71888 /* ValidateFeedCacheUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0D684B124C9BAC400F71888 /* ValidateFeedCacheUseCaseTest.swift */; };
 		E0FC0C0724915CED0090C0AA /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FC0C0624915CED0090C0AA /* RemoteFeedLoader.swift */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		E0D684AA24C86F8700F71888 /* RemoteFeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedItem.swift; sourceTree = "<group>"; };
 		E0D684AC24C9751600F71888 /* LoadFeedFromCacheUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFeedFromCacheUseCaseTests.swift; sourceTree = "<group>"; };
 		E0D684AF24C9761300F71888 /* FeedStoreSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStoreSpy.swift; sourceTree = "<group>"; };
+		E0D684B124C9BAC400F71888 /* ValidateFeedCacheUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateFeedCacheUseCaseTest.swift; sourceTree = "<group>"; };
 		E0FC0C0624915CED0090C0AA /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 				E0D684AE24C975FA00F71888 /* Helpers */,
 				E053254B24C1C68D002AA55A /* CacheFeedUseCaseTests.swift */,
 				E0D684AC24C9751600F71888 /* LoadFeedFromCacheUseCaseTests.swift */,
+				E0D684B124C9BAC400F71888 /* ValidateFeedCacheUseCaseTest.swift */,
 			);
 			path = "Feed Cache";
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				E0D684B024C9761300F71888 /* FeedStoreSpy.swift in Sources */,
 				E053254C24C1C68D002AA55A /* CacheFeedUseCaseTests.swift in Sources */,
 				E0D684AD24C9751600F71888 /* LoadFeedFromCacheUseCaseTests.swift in Sources */,
+				E0D684B224C9BAC400F71888 /* ValidateFeedCacheUseCaseTest.swift in Sources */,
 				E0267F8F249B600000E0A89A /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
