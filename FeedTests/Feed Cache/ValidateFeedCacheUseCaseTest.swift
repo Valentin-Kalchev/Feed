@@ -65,7 +65,7 @@ class ValidateFeedCacheUseCaseTest: XCTestCase {
         let feed = uniqueImageFeed()
         
         let fixedCurrentDate = Date()
-        let expirationTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(days: -1)
+        let expirationTimestamp = fixedCurrentDate.minusFeedCacheMaxAge().adding(seconds: -1)
         
         let (sut, store) = makeSUT(currentDate: { fixedCurrentDate })
         
