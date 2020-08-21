@@ -9,7 +9,7 @@
 import Foundation
 
 // Data Transfer Object - DTO
-public struct LocalFeedImage: Codable, Equatable {
+public struct LocalFeedImage: Equatable {
     public let id: UUID
     public let description: String?
     public let location: String?
