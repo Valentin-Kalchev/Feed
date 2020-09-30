@@ -6,7 +6,6 @@
 //  Copyright © 2020 Valentin Kalchev. All rights reserved.
 //
 
-import Foundation
 import CoreData
 
 internal extension NSPersistentContainer {
