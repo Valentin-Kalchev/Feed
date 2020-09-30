@@ -64,8 +64,9 @@ class CoreDataFeedStoreTests: XCTestCase, FeedStoreSpecs {
     // MARK: - Helpers
     
     func makeSUT() -> CoreDataFeedStore {
+        let storeURL = URL(fileURLWithPath: "/dev/null")
         let bundle = Bundle(for: CoreDataFeedStore.self)
-        let sut = try! CoreDataFeedStore(bundle: bundle)
+        let sut = try! CoreDataFeedStore(storeURL: storeURL, bundle: bundle)
         trackForMemoryLeaks(sut)
         return sut
     }
