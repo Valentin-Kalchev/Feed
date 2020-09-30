@@ -161,7 +161,8 @@
 		E0393AD1248A28D100AFA5A2 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				E0DFDDE2252500EA0056E4FA /* Feed Core Data  */,
+				E0DFDDE2252500EA0056E4FA /* Infrastructure */,
+				E094E589252516C900E3E501 /* Codable */,
 				E0D684A324C85F0400F71888 /* Feed Cache */,
 				E0393AD3248A28D100AFA5A2 /* Info.plist */,
 				E0393AED248A29EF00AFA5A2 /* Feed Feature */,
@@ -173,7 +174,7 @@
 		E0393ADC248A28D100AFA5A2 /* FeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				E0DFDDE32525010A0056E4FA /* Core Data */,
+				E0DFDDE32525010A0056E4FA /* Infrastructure */,
 				E05364F2249CF3A60087C6E7 /* Helpers */,
 				E053254A24C1C672002AA55A /* Feed Cache */,
 				E0393ADF248A28D100AFA5A2 /* Info.plist */,
@@ -226,6 +227,14 @@
 			path = "Feed API";
 			sourceTree = "<group>";
 		};
+		E094E589252516C900E3E501 /* Codable */ = {
+			isa = PBXGroup;
+			children = (
+				E0FA6E742510B8ED008D8C10 /* CodableFeedStore.swift */,
+			);
+			path = Codable;
+			sourceTree = "<group>";
+		};
 		E0D684A324C85F0400F71888 /* Feed Cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,7 +243,6 @@
 				E0D684A624C85F4400F71888 /* FeedStore.swift */,
 				E053756B24CAF78A00D796D1 /* FeedCachePolicy.swift */,
 				E0C88D0E24DAA04400984A9E /* FeedStoreExpectations.strings */,
-				E0FA6E742510B8ED008D8C10 /* CodableFeedStore.swift */,
 			);
 			path = "Feed Cache";
 			sourceTree = "<group>";
@@ -248,21 +256,21 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		E0DFDDE2252500EA0056E4FA /* Feed Core Data  */ = {
+		E0DFDDE2252500EA0056E4FA /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
 				E0DFDDEC2525024E0056E4FA /* Model.xcdatamodeld */,
 				E0DFDDF2252503130056E4FA /* CoreDataFeedStore.swift */,
 			);
-			path = "Feed Core Data ";
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
-		E0DFDDE32525010A0056E4FA /* Core Data */ = {
+		E0DFDDE32525010A0056E4FA /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
 				E0DFDDE4252501240056E4FA /* CoreDataFeedStoreTests.swift */,
 			);
-			path = "Core Data";
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 		E0FC0C0524915CD70090C0AA /* Feed API */ = {
