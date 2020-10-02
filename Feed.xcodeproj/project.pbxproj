@@ -192,10 +192,8 @@
 		E0393AD1248A28D100AFA5A2 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				E0DFDDE2252500EA0056E4FA /* Infrastructure */,
-				E094E589252516C900E3E501 /* Codable */,
-				E0D684A324C85F0400F71888 /* Feed Cache */,
 				E0393AD3248A28D100AFA5A2 /* Info.plist */,
+				E0D684A324C85F0400F71888 /* Feed Cache */,
 				E0393AED248A29EF00AFA5A2 /* Feed Feature */,
 				E0FC0C0524915CD70090C0AA /* Feed API */,
 			);
@@ -269,6 +267,7 @@
 		E0D684A324C85F0400F71888 /* Feed Cache */ = {
 			isa = PBXGroup;
 			children = (
+				E0DFDDE2252500EA0056E4FA /* Infrastructure */,
 				E0D684A424C85F1500F71888 /* LocalFeedLoader.swift */,
 				E0D684A824C8696A00F71888 /* LocalFeedImage.swift */,
 				E0D684A624C85F4400F71888 /* FeedStore.swift */,
@@ -296,7 +295,7 @@
 			path = FeedCacheIntegrationTests;
 			sourceTree = "<group>";
 		};
-		E0DFDDE2252500EA0056E4FA /* Infrastructure */ = {
+		E0DF42E82526FF3300154BEA /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				E0DFDDEC2525024E0056E4FA /* Model.xcdatamodeld */,
@@ -304,6 +303,15 @@
 				E094E58D2525171300E3E501 /* CoreDataHelpers.swift */,
 				E094E592252517A500E3E501 /* ManagedCache.swift */,
 				E094E597252517BE00E3E501 /* ManagedFeedImage.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		E0DFDDE2252500EA0056E4FA /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				E0DF42E82526FF3300154BEA /* CoreData */,
+				E094E589252516C900E3E501 /* Codable */,
 			);
 			path = Infrastructure;
 			sourceTree = "<group>";
@@ -420,7 +428,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1150;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Valentin Kalchev";
 				TargetAttributes = {
 					E01ED84224A9CF9B00348735 = {
@@ -643,6 +651,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -706,6 +715,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

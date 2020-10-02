@@ -24,7 +24,7 @@ class FeedCacheIntegrationTests: XCTestCase {
         expect(sut: sutToPerformLoad, toLoad: feed)
     }
     
-    func test_save_overridesItemsSavedOnaSeparateInstance() {
+    func test_save_overridesItemsSavedOnASeparateInstance() {
         let sutToPerformFirstSave = makeSUT()
         let sutToPerformLastSave = makeSUT()
         let sutToPerformLoad = makeSUT()
