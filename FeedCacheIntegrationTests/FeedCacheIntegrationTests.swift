@@ -12,18 +12,7 @@ import Feed
 class FeedCacheIntegrationTests: XCTestCase {
     func test_load_deliversNoItemsOnEmptyCache() {
         let sut = makeSUT()
-        let exp = expectation(description: "Wait for load completion")
-        sut.load { (result) in
-            switch result {
-            case let .success(imageFeed):
-                XCTAssertEqual(imageFeed, [], "Expected empty feed")
-            case let .failure(error):
-                XCTFail("Expected successful feed result, got \(error) instead")
-            }
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1.0)
+        expect(sut: sut, toLoad: [])
     }
     
     func test_load_deliversItemsSavedOnASeparateInstance() {
@@ -38,18 +27,7 @@ class FeedCacheIntegrationTests: XCTestCase {
         }
         wait(for: [saveExp], timeout: 1.0)
         
-        let loadExp = expectation(description: "Wait for load completion")
-        sutToPerformLoad.load { (result) in
-            switch result {
-            case let .success(loadFeed):
-                XCTAssertEqual(feed, loadFeed)
-            case let .failure(error):
-                XCTFail("Expected successful feed result, got \(error) instead")
-            }
-            loadExp.fulfill()
-        }
-        
-        wait(for: [loadExp], timeout: 1.0)
+        expect(sut: sutToPerformLoad, toLoad: feed)
     }
     
     override func setUp() {
@@ -90,5 +68,20 @@ class FeedCacheIntegrationTests: XCTestCase {
     
     private func deleteStoreArtefacts() {
         try? FileManager.default.removeItem(at: testSpecificStoreURL())
+    }
+    
+    private func expect(sut: LocalFeedLoader, toLoad feed: [FeedImage], file: StaticString = #file, line: UInt = #line) {
+        let exp = expectation(description: "Wait for load completion")
+        sut.load { (result) in
+            switch result {
+            case let .success(imageFeed):
+                XCTAssertEqual(imageFeed, feed, "Expected empty feed", file: file, line: line)
+            case let .failure(error):
+                XCTFail("Expected successful feed result, got \(error) instead", file: file, line: line)
+            }
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
     }
 }
