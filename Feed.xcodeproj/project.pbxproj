@@ -26,6 +26,7 @@
 		E053254C24C1C68D002AA55A /* CacheFeedUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053254B24C1C68D002AA55A /* CacheFeedUseCaseTests.swift */; };
 		E05364F4249CF3DA0087C6E7 /* XCTestCase+Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05364F3249CF3DA0087C6E7 /* XCTestCase+Tracking.swift */; };
 		E053756C24CAF78A00D796D1 /* FeedCachePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053756B24CAF78A00D796D1 /* FeedCachePolicy.swift */; };
+		E058E03F253E140000BBC1EE /* FeedViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E058E03E253E140000BBC1EE /* FeedViewControllerTests.swift */; };
 		E086E1D52498AE0300B84E1F /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086E1D42498AE0300B84E1F /* HTTPClient.swift */; };
 		E086E1D72498B0EE00B84E1F /* FeedItemsMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E086E1D62498B0EE00B84E1F /* FeedItemsMapper.swift */; };
 		E094E58E2525171300E3E501 /* CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E094E58D2525171300E3E501 /* CoreDataHelpers.swift */; };
@@ -109,6 +110,7 @@
 		E053254B24C1C68D002AA55A /* CacheFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedUseCaseTests.swift; sourceTree = "<group>"; };
 		E05364F3249CF3DA0087C6E7 /* XCTestCase+Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Tracking.swift"; sourceTree = "<group>"; };
 		E053756B24CAF78A00D796D1 /* FeedCachePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCachePolicy.swift; sourceTree = "<group>"; };
+		E058E03E253E140000BBC1EE /* FeedViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewControllerTests.swift; sourceTree = "<group>"; };
 		E086E1D42498AE0300B84E1F /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		E086E1D62498B0EE00B84E1F /* FeedItemsMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemsMapper.swift; sourceTree = "<group>"; };
 		E094E58D2525171300E3E501 /* CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataHelpers.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				E025873F2539D42E006963A1 /* Info.plist */,
+				E058E03E253E140000BBC1EE /* FeedViewControllerTests.swift */,
 			);
 			path = FeediOSTests;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 					};
 					E02587372539D42E006963A1 = {
 						CreatedOnToolsVersion = 12.0.1;
+						LastSwiftMigration = 1200;
 					};
 					E0393ACE248A28D100AFA5A2 = {
 						CreatedOnToolsVersion = 11.5;
@@ -629,6 +633,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E058E03F253E140000BBC1EE /* FeedViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -812,6 +817,7 @@
 		E02587432539D42E006963A1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JKJHN735FS;
 				INFOPLIST_FILE = FeediOSTests/Info.plist;
@@ -824,6 +830,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkalchev.FeediOSTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -832,6 +839,7 @@
 		E02587442539D42E006963A1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JKJHN735FS;
 				INFOPLIST_FILE = FeediOSTests/Info.plist;
