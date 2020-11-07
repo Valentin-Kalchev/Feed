@@ -415,7 +415,7 @@ private extension FeedImageCell {
     }
     
     var isShowingRetryAction: Bool {
-        return !feedRetryButton.isHidden
+        return !feedImageRetryButton.isHidden
     }
     
     var locationText: String? {
@@ -431,7 +431,7 @@ private extension FeedImageCell {
     }
     
     func simulateRetryAction() {
-        feedRetryButton.simulateTap()
+        feedImageRetryButton.simulateTap()
     }
 }
 

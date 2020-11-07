@@ -29,7 +29,8 @@ public final class FeedUIComposer {
         return { [weak controller] feed in
             // Adapter Pattern - transforms feed images to feed image cell controllers
             controller?.tableModel = feed.map { model in
-                FeedImageCellController(model: model, imageLoader: loader)
+                let feedImageViewModel = FeedImageViewModel(imageLoader: loader, model: model, imageTransformer: UIImage.init)
+                return FeedImageCellController(viewModel: feedImageViewModel)
             }
         }
     }
