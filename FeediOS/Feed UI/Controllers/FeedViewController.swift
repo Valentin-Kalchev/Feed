@@ -6,8 +6,7 @@
 //  Copyright © 2020 Valentin Kalchev. All rights reserved.
 //
 
-import UIKit
-import Feed
+import UIKit 
 
 public final class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     
