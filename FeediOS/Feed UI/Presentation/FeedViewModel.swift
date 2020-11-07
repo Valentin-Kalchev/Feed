@@ -5,8 +5,7 @@
 //  Created by Valentin Kalchev (Zuant) on 03/11/20.
 //  Copyright © 2020 Valentin Kalchev. All rights reserved.
 //
-
-import Foundation
+ 
 import Feed
 
 final class FeedViewModel {
