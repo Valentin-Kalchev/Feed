@@ -77,6 +77,9 @@
                                                             <state key="normal" title="🌀">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="retryButtonTapped" destination="q5J-jA-fOB" eventType="touchUpInside" id="6Iq-V3-e0h"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.89019607840000003" green="0.89019607840000003" blue="0.89019607840000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -118,6 +121,14 @@
                                         <constraint firstAttribute="bottomMargin" secondItem="hcs-he-1Kj" secondAttribute="bottom" priority="999" constant="6" id="xgD-KG-2QV"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="hD5-Tx-F8p" id="HzK-wH-3ON"/>
+                                    <outlet property="feedImageContainer" destination="DNf-iu-Z91" id="nSA-as-2gC"/>
+                                    <outlet property="feedImageRetryButton" destination="CTt-zZ-F3b" id="m3x-xd-WO9"/>
+                                    <outlet property="feedImageView" destination="O9h-zb-vlg" id="yD7-4l-epH"/>
+                                    <outlet property="locationContainer" destination="7v1-yB-sSi" id="n3a-YP-HlO"/>
+                                    <outlet property="locationLabel" destination="328-mR-Erf" id="pEJ-X1-6I3"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
