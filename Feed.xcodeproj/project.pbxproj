@@ -20,6 +20,7 @@
 		E0267F8F249B600000E0A89A /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0267F8E249B600000E0A89A /* URLSessionHTTPClientTests.swift */; };
 		E035B9AC255C285C001EA551 /* UIImageView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035B9AB255C285C001EA551 /* UIImageView+Animations.swift */; };
 		E035B9C9255EA001001EA551 /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = E035B9C8255EA001001EA551 /* Feed.strings */; };
+		E035B9D0255EA230001EA551 /* FeedViewControllerTests+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E035B9CF255EA230001EA551 /* FeedViewControllerTests+Localization.swift */; };
 		E0393AD9248A28D100AFA5A2 /* Feed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0393ACF248A28D100AFA5A2 /* Feed.framework */; };
 		E0393AEA248A28DA00AFA5A2 /* FeedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0393AE9248A28DA00AFA5A2 /* FeedImage.swift */; };
 		E0393AEC248A294A00AFA5A2 /* FeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0393AEB248A294A00AFA5A2 /* FeedLoader.swift */; };
@@ -27,7 +28,7 @@
 		E0456D0124EC0B7E0049FA02 /* CodableFeedStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0456D0024EC0B7E0049FA02 /* CodableFeedStoreTests.swift */; };
 		E0474870255BF74100C89148 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E047486F255BF74100C89148 /* Feed.storyboard */; };
 		E0474877255BF7C600C89148 /* FeedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0474876255BF7C600C89148 /* FeedAssets.xcassets */; };
-		E0474884255C01B700C89148 /* LoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0474883255C01B700C89148 /* LoaderSpy.swift */; };
+		E0474884255C01B700C89148 /* FeedViewControllerTests+LoaderSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0474883255C01B700C89148 /* FeedViewControllerTests+LoaderSpy.swift */; };
 		E0474890255C033500C89148 /* UITableView+Dequeueing.swift in Sources */ = {isa = PBXBuildFile; fileRef = E047488F255C033500C89148 /* UITableView+Dequeueing.swift */; };
 		E053254C24C1C68D002AA55A /* CacheFeedUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E053254B24C1C68D002AA55A /* CacheFeedUseCaseTests.swift */; };
 		E05364F4249CF3DA0087C6E7 /* XCTestCase+Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05364F3249CF3DA0087C6E7 /* XCTestCase+Tracking.swift */; };
@@ -140,6 +141,7 @@
 		E0267F8E249B600000E0A89A /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 		E035B9AB255C285C001EA551 /* UIImageView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Animations.swift"; sourceTree = "<group>"; };
 		E035B9C8255EA001001EA551 /* Feed.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Feed.strings; sourceTree = "<group>"; };
+		E035B9CF255EA230001EA551 /* FeedViewControllerTests+Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedViewControllerTests+Localization.swift"; sourceTree = "<group>"; };
 		E0393ACF248A28D100AFA5A2 /* Feed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0393AD3248A28D100AFA5A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0393AD8248A28D100AFA5A2 /* FeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,7 +152,7 @@
 		E0456D0024EC0B7E0049FA02 /* CodableFeedStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableFeedStoreTests.swift; sourceTree = "<group>"; };
 		E047486F255BF74100C89148 /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		E0474876255BF7C600C89148 /* FeedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FeedAssets.xcassets; sourceTree = "<group>"; };
-		E0474883255C01B700C89148 /* LoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderSpy.swift; sourceTree = "<group>"; };
+		E0474883255C01B700C89148 /* FeedViewControllerTests+LoaderSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedViewControllerTests+LoaderSpy.swift"; sourceTree = "<group>"; };
 		E047488F255C033500C89148 /* UITableView+Dequeueing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Dequeueing.swift"; sourceTree = "<group>"; };
 		E053254B24C1C68D002AA55A /* CacheFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedUseCaseTests.swift; sourceTree = "<group>"; };
 		E05364F3249CF3DA0087C6E7 /* XCTestCase+Tracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Tracking.swift"; sourceTree = "<group>"; };
@@ -331,7 +333,8 @@
 		E0474882255C019B00C89148 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				E0474883255C01B700C89148 /* LoaderSpy.swift */,
+				E0474883255C01B700C89148 /* FeedViewControllerTests+LoaderSpy.swift */,
+				E035B9CF255EA230001EA551 /* FeedViewControllerTests+Localization.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -784,9 +787,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0474884255C01B700C89148 /* LoaderSpy.swift in Sources */,
+				E0474884255C01B700C89148 /* FeedViewControllerTests+LoaderSpy.swift in Sources */,
 				E058E03F253E140000BBC1EE /* FeedViewControllerTests.swift in Sources */,
 				E058E057253E17D800BBC1EE /* XCTestCase+Tracking.swift in Sources */,
+				E035B9D0255EA230001EA551 /* FeedViewControllerTests+Localization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
