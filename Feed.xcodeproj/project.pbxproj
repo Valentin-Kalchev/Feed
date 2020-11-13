@@ -155,6 +155,7 @@
 		E035BA23255EA62C001EA551 /* FeedViewController+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FeedViewController+TestHelpers.swift"; sourceTree = "<group>"; };
 		E035BA2B255EA6B3001EA551 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Feed.strings; sourceTree = "<group>"; };
 		E035BA32255EA6E9001EA551 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Feed.strings"; sourceTree = "<group>"; };
+		E035BA38255EA718001EA551 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Feed.strings; sourceTree = "<group>"; };
 		E0393ACF248A28D100AFA5A2 /* Feed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Feed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0393AD3248A28D100AFA5A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E0393AD8248A28D100AFA5A2 /* FeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -719,6 +720,7 @@
 				en,
 				Base,
 				"pt-BR",
+				el,
 			);
 			mainGroup = E0393AC5248A28D100AFA5A2;
 			productRefGroup = E0393AD0248A28D100AFA5A2 /* Products */;
@@ -922,6 +924,7 @@
 			children = (
 				E035BA2B255EA6B3001EA551 /* en */,
 				E035BA32255EA6E9001EA551 /* pt-BR */,
+				E035BA38255EA718001EA551 /* el */,
 			);
 			name = Feed.strings;
 			sourceTree = "<group>";
