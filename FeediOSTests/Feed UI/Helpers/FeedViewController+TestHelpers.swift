@@ -14,6 +14,12 @@ extension FeedViewController {
         self.refreshControl?.simulatePullToRefresh()
     }
     
+    var errorMessage: String? {
+        get {
+            return (self.tableView.tableHeaderView as? ErrorView)?.message
+        }
+    }
+    
     @discardableResult
     func simulateFeedImageViewVisible(at index: Int) -> FeedImageCell? {
         return feedImageView(at: index) as? FeedImageCell
