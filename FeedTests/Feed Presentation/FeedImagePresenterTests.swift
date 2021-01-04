@@ -94,8 +94,8 @@ class FeedImagePresenterTests: XCTestCase {
             messages.append(.display(FeedImageViewModel(description: model.description,
                                                         location: model.location,
                                                         image: model.image,
-                                                        isLoading: true,
-                                                        shouldRetry: false)))
+                                                        isLoading: model.isLoading,
+                                                        shouldRetry: model.shouldRetry)))
         }
     }
 }
