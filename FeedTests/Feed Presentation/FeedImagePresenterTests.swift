@@ -43,9 +43,7 @@ class FeedImagePresenter<View: FeedImageView, Image> where View.Image == Image {
     
     func didFinishLoadingImageData(with data: Data, for model: FeedImage) {
         guard let image = imageTransformer(data) else {
-            fatalError()
-// TODO
-//            return didFinishLoadingImageData(with: InvalidImageDataError(), for: model)
+            return didFinishLoadingImageData(with: InvalidImageDataError(), for: model)
         }
         view.display(FeedImageViewModel(description: model.description, location: model.location, image: image, isLoading: false, shouldRetry: false))
     }
@@ -67,10 +65,16 @@ class FeedImagePresenterTests: XCTestCase {
     
     func test_didStartLoadingImageData_imageLoadingWithDescriptionAndLocation() {
         let (sut, view) = makeSUT()
-        let viewModel = FeedImageViewModel<UIImage>(description: "some description", location: "some location", image: nil, isLoading: true, shouldRetry: false)
-        let image = makeImage(description: viewModel.description, location: viewModel.location, url: anyURL())
+        let location = "some location"
+        let description = "some description"
+        let image = makeImage(description: description, location: location, url: anyURL())
         sut.didStartLoadingImageData(for: image)
-        XCTAssertEqual(view.messages, [.display(viewModel)], "Expected loadin")
+        XCTAssertEqual(view.messages, [.display(FeedImageViewModel<UIImage>(
+                                                    description: "some description",
+                                                    location: "some location",
+                                                    image: nil,
+                                                    isLoading: true,
+                                                    shouldRetry: false))])
     }
     
     func test_didFinishLoadingImageData_withValidData() {
@@ -88,13 +92,36 @@ class FeedImagePresenterTests: XCTestCase {
     func test_didFinishLoadingImageData_retryOnInvalidData() {
         let (sut, view) = makeSUT()
         
-        let image = UIImage(data: Data(base64Encoded: "".data(using: .utf8)!)!)
+        let invalidImageData = "some data".data(using: .utf8)!
+        let location = "some location"
+        let description = "some description"
         
-        let viewModel = FeedImageViewModel<UIImage>(description: "some description", location: "some location", image: image, isLoading: false, shouldRetry: true)
+        let feedImage = makeImage(description: description,
+                                  location: location,
+                                  url: anyURL())
         
-        let feedImage = makeImage(description: viewModel.description, location: viewModel.location, url: anyURL())
+        sut.didFinishLoadingImageData(with: invalidImageData, for: feedImage)
+        XCTAssertEqual(view.messages, [.display(FeedImageViewModel<UIImage>(
+                                                    description: description,
+                                                    location: location,
+                                                    image: nil,
+                                                    isLoading: false,
+                                                    shouldRetry: true))])
+    }
+    
+    func test_didFinishLoadingImageData_errorOnInvalidData() {
+        let (sut, view) = makeSUT()
+        let location = "some location"
+        let description = "some description"
+        
+        let feedImage = makeImage(description: description, location: location, url: anyURL())
         sut.didFinishLoadingImageData(with: anyNSError(), for: feedImage)
-        XCTAssertEqual(view.messages, [.display(viewModel)])
+        XCTAssertEqual(view.messages, [.display(FeedImageViewModel<UIImage>(
+                                                    description: description,
+                                                    location: location,
+                                                    image: nil,
+                                                    isLoading: false,
+                                                    shouldRetry: true))])
     }
     
     private func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
