@@ -49,6 +49,14 @@ class FeedImagePresenter<View: FeedImageView, Image> where View.Image == Image {
         }
         view.display(FeedImageViewModel(description: model.description, location: model.location, image: image, isLoading: false, shouldRetry: false))
     }
+    
+    func didFinishLoadingImageData(with error: Error, for model: FeedImage) {
+        view.display(FeedImageViewModel(description: model.description,
+                                        location: model.location,
+                                        image: nil,
+                                        isLoading: false,
+                                        shouldRetry: true))
+    }
 }
 
 class FeedImagePresenterTests: XCTestCase {
@@ -74,6 +82,18 @@ class FeedImagePresenterTests: XCTestCase {
         let feedImage = makeImage(description: viewModel.description, location: viewModel.location, url: anyURL())
         
         sut.didFinishLoadingImageData(with: image.pngData()!, for: feedImage)
+        XCTAssertEqual(view.messages, [.display(viewModel)])
+    }
+    
+    func test_didFinishLoadingImageData_retryOnInvalidData() {
+        let (sut, view) = makeSUT()
+        
+        let image = UIImage(data: Data(base64Encoded: "".data(using: .utf8)!)!)
+        
+        let viewModel = FeedImageViewModel<UIImage>(description: "some description", location: "some location", image: image, isLoading: false, shouldRetry: true)
+        
+        let feedImage = makeImage(description: viewModel.description, location: viewModel.location, url: anyURL())
+        sut.didFinishLoadingImageData(with: anyNSError(), for: feedImage)
         XCTAssertEqual(view.messages, [.display(viewModel)])
     }
     
