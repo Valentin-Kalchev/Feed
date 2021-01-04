@@ -29,13 +29,25 @@ protocol FeedImageView {
 
 class FeedImagePresenter<View: FeedImageView, Image> where View.Image == Image {
     private let view: View
+    private let imageTransformer: (Data) -> Image?
+    private struct InvalidImageDataError: Error {}
     
-    init(view: View) {
+    init(view: View, imageTransformer: @escaping (Data) -> Image?) {
         self.view = view
+        self.imageTransformer = imageTransformer
     }
     
     func didStartLoadingImageData(for model: FeedImage) {
         view.display(FeedImageViewModel(description: model.description, location: model.location, image: nil, isLoading: true, shouldRetry: false))
+    }
+    
+    func didFinishLoadingImageData(with data: Data, for model: FeedImage) {
+        guard let image = imageTransformer(data) else {
+            fatalError()
+// TODO
+//            return didFinishLoadingImageData(with: InvalidImageDataError(), for: model)
+        }
+        view.display(FeedImageViewModel(description: model.description, location: model.location, image: image, isLoading: false, shouldRetry: false))
     }
 }
 
@@ -48,8 +60,25 @@ class FeedImagePresenterTests: XCTestCase {
     func test_didStartLoadingImageData_imageLoadingWithDescriptionAndLocation() {
         let (sut, view) = makeSUT()
         let viewModel = FeedImageViewModel<UIImage>(description: "some description", location: "some location", image: nil, isLoading: true, shouldRetry: false)
-        sut.didStartLoadingImageData(for: FeedImage(id: UUID(), description: viewModel.description, location: viewModel.location, url: anyURL()))
+        let image = makeImage(description: viewModel.description, location: viewModel.location, url: anyURL())
+        sut.didStartLoadingImageData(for: image)
         XCTAssertEqual(view.messages, [.display(viewModel)], "Expected loadin")
+    }
+    
+    func test_didFinishLoadingImageData_withValidData() {
+        let (sut, view) = makeSUT()
+        
+        let image = UIImage.make(withColor: .red)
+        let viewModel = FeedImageViewModel<UIImage>(description: "some description", location: "some location", image: image, isLoading: false, shouldRetry: false)
+        
+        let feedImage = makeImage(description: viewModel.description, location: viewModel.location, url: anyURL())
+        
+        sut.didFinishLoadingImageData(with: image.pngData()!, for: feedImage)
+        XCTAssertEqual(view.messages, [.display(viewModel)])
+    }
+    
+    private func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
+        return FeedImage(id: UUID(), description: description, location: location, url: url)
     }
     
     // MARK: - Helpers
@@ -57,10 +86,10 @@ class FeedImagePresenterTests: XCTestCase {
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedImagePresenter<ViewSpy, UIImage>, ViewSpy) {
         
         let view = ViewSpy()
-        let sut = FeedImagePresenter(view: view)
+        let sut = FeedImagePresenter(view: view, imageTransformer: UIImage.init)
         
-        trackForMemoryLeaks(view)
-        trackForMemoryLeaks(sut)
+        trackForMemoryLeaks(view, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
         
         return (sut, view)
     }
@@ -75,7 +104,7 @@ class FeedImagePresenterTests: XCTestCase {
                 case let (display(lhsm), display(rhsm)):
                     if lhsm.description == rhsm.description &&
                         lhsm.location == rhsm.location &&
-                        lhsm.image == rhsm.image &&
+                        lhsm.image?.pngData() == rhsm.image?.pngData() &&
                     lhsm.isLoading == rhsm.isLoading &&
                         lhsm.shouldRetry == rhsm.shouldRetry {
                          return true
@@ -99,3 +128,17 @@ class FeedImagePresenterTests: XCTestCase {
         }
     }
 }
+
+extension UIImage {
+    static func make(withColor color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
+    }
+}
+
