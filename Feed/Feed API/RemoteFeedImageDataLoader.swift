@@ -8,11 +8,3 @@
 
 import Foundation
 
-public final class RemoteFeedImageDataLoader {
-    
-    private let client: Any
-    
-    public init(client: Any) {
-        self.client = client
-    }
-}
