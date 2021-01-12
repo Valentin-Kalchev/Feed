@@ -10,28 +10,6 @@ import Foundation
 
 public final class RemoteFeedImageDataLoader: FeedImageDataLoader {
     
-    private final class HTTPClientTaskWrapper: FeedImageDataLoaderTask {
-        private var completion: ((FeedImageDataLoader.Result) -> Void)?
-        var wrapped: HTTPClientTask?
-        
-        init(_ completion: @escaping (FeedImageDataLoader.Result) -> Void) {
-            self.completion = completion
-        }
-        
-        func complete(with result: FeedImageDataLoader.Result) {
-            completion?(result)
-        }
-        
-        func cancel() {
-            preventFurtherCompletions()
-            wrapped?.cancel()
-        }
-        
-        private func preventFurtherCompletions() {
-            completion = nil
-        }
-    }
-    
     public enum Error: Swift.Error {
         case connectivity
         case invalidData
@@ -57,5 +35,27 @@ public final class RemoteFeedImageDataLoader: FeedImageDataLoader {
         }
         
         return task
+    }
+    
+    private final class HTTPClientTaskWrapper: FeedImageDataLoaderTask {
+        private var completion: ((FeedImageDataLoader.Result) -> Void)?
+        var wrapped: HTTPClientTask?
+        
+        init(_ completion: @escaping (FeedImageDataLoader.Result) -> Void) {
+            self.completion = completion
+        }
+        
+        func complete(with result: FeedImageDataLoader.Result) {
+            completion?(result)
+        }
+        
+        func cancel() {
+            preventFurtherCompletions()
+            wrapped?.cancel()
+        }
+        
+        private func preventFurtherCompletions() {
+            completion = nil
+        }
     }
 }
