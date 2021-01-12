@@ -157,6 +157,8 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         action()
         wait(for: [exp], timeout: 1.0)
     }
+    
+    /*
 
     private class HTTPClientSpy: HTTPClient {
         private struct Task: HTTPClientTask {
@@ -188,4 +190,5 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
             messages[index].completion(.success((data, response)))
         }
     }
+ */
 }
