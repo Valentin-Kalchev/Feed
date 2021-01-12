@@ -169,6 +169,7 @@ class RemoteFeedImageDataLoaderTests: XCTestCase {
             return messages.map { $0.url }
         }
         
+        @discardableResult
         func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
             messages.append((url, completion))
             return Task()

@@ -169,6 +169,7 @@ class LoadFeedFromRemoteUseCaseTests: XCTestCase {
         
         private var messages = [(url: URL, completion: (HTTPClient.Result) -> Void)]()
         
+        @discardableResult
         func get(from url: URL, completion: @escaping (HTTPClient.Result) -> Void) -> HTTPClientTask {
             messages.append((url, completion))
             return Task()
