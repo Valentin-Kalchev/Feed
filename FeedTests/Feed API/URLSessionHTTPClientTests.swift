@@ -10,14 +10,10 @@ import XCTest
 import Feed
 
 class URLSessionHTTPClientTests: XCTestCase {
-    override func setUp() {
-        super.setUp()
-        URLProtocolStub.startInterceptingRequests()
-    }
-    
+
     override func tearDown() {
         super.tearDown()
-        URLProtocolStub.stopInterceptingRequests()
+        URLProtocolStub.removeStub()
     }
     
     func test_getFromURL_performansGETRequestWithURL() {
@@ -74,21 +70,6 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
     
     func test_cancelGetFromURLTask_cancelsURLRequest() {
-//        let url = anyURL()
-//        let exp = expectation(description: "Wait for request")
-//
-//        let task = makeSUT().get(from: url) { (result) in
-//            switch result {
-//            case let .failure(error as NSError) where error.code == URLError.cancelled.rawValue:
-//                break
-//            default:
-//                XCTFail("Expected cancelled result, got \(result) instead")
-//            }
-//            exp.fulfill()
-//        }
-//
-//        task.cancel()
-        
         let receivedError = resultErrorFor(taskHandler: { $0.cancel() }) as NSError?
         XCTAssertEqual(receivedError?.code, URLError.cancelled.rawValue)
     }
@@ -97,7 +78,11 @@ class URLSessionHTTPClientTests: XCTestCase {
     // MARK: - Helpers
     
     private func makeSUT(file: StaticString = #file, line: UInt = #line) -> HTTPClient {
-        let sut = URLSessionHTTPClient()
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.protocolClasses = [URLProtocolStub.self]
+        let session = URLSession(configuration: configuration)
+        
+        let sut = URLSessionHTTPClient(session: session)
         trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
@@ -171,12 +156,7 @@ class URLSessionHTTPClientTests: XCTestCase {
             stub = Stub(data: data, response: response, error: error, requestObserver: nil)
         }
         
-        static func startInterceptingRequests() {
-            URLProtocol.registerClass(URLProtocolStub.self)
-        }
-        
-        static func stopInterceptingRequests() {
-            URLProtocol.unregisterClass(URLProtocolStub.self)
+        static func removeStub() {
             stub = nil
         }
         
