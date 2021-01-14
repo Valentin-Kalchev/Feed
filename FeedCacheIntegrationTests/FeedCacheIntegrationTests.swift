@@ -47,13 +47,30 @@ class FeedCacheIntegrationTests: XCTestCase {
         save(feed: [image], with: feedLoader)
         save(dataToSave, for: image.url, with: imageLoaderToPerformSave)
         
-        expect(sut: imageLoaderToPerformLoad, toLoad: dataToSave, for: image.url)
+        expect(imageLoaderToPerformLoad, toLoad: dataToSave, for: image.url)
     }
     
-    private func expect(_ loader: LocalFeedImageDataLoader, toLoad expectedData: Data, for url: URL) {
+    func test_saveImageData_overridesSavedImageDataOnASeparateInstance() {
+        let imageLoaderToPerformFirstSave = makeImageLoader()
+        let imageLoaderToPerformLastSave = makeImageLoader()
+        
+        let imageLoaderToPerformLoad = makeImageLoader()
+        let feedLoader = makeFeedLoader()
+        let image = uniqueImage()
+        let firstImageData = Data("first".utf8)
+        let lastImageData = Data("last".utf8)
+        
+        save(feed: [image], with: feedLoader)
+        save(firstImageData, for: image.url, with: imageLoaderToPerformFirstSave)
+        save(lastImageData, for: image.url, with: imageLoaderToPerformLastSave)
+        
+        expect(imageLoaderToPerformLoad, toLoad: lastImageData, for: image.url)
+    }
+    
+    private func expect(_ loader: LocalFeedImageDataLoader, toLoad expectedData: Data, for url: URL, file: StaticString = #file, line: UInt = #line) {
         
         let exp = expectation(description: "Wait to load data")
-        loader.loadImageData(from: url) { (result) in
+        _ = loader.loadImageData(from: url) { (result) in
             
             switch result {
             case let .success(receivedData):
