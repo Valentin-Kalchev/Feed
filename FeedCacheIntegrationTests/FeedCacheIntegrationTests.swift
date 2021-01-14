@@ -77,6 +77,17 @@ class FeedCacheIntegrationTests: XCTestCase {
         expect(sut: feedLoaderToPerformSave, toLoad: feed)
     }
     
+    func test_validateFeedCache_deletesFeedSavedInADistantPast() {
+        let feedLoaderToPerformSave = makeFeedLoader(currentDate: .distantPast)
+        let feedLoaderToPerformValidation = makeFeedLoader(currentDate: Date())
+        let feed = uniqueImageFeed().models
+        
+        save(feed: feed, with: feedLoaderToPerformSave)
+        validateCache(with: feedLoaderToPerformValidation)
+        
+        expect(sut: feedLoaderToPerformSave, toLoad: [])
+    }
+    
     private func validateCache(with loader: LocalFeedLoader, file: StaticString = #file, line: UInt = #line) {
         let exp = expectation(description: "Wait for save completion")
         loader.validateCache() { result in
@@ -129,10 +140,11 @@ class FeedCacheIntegrationTests: XCTestCase {
         return sut
     }
     
-    private func makeFeedLoader(file: StaticString = #file, line: UInt = #line) -> LocalFeedLoader {
+    private func makeFeedLoader(currentDate: Date = Date(), file: StaticString = #file, line: UInt = #line) -> LocalFeedLoader {
         let storeURL = testSpecificStoreURL()
         let store = try! CoreDataFeedStore(storeURL: storeURL)
-        let sut = LocalFeedLoader(store: store, currentDate: Date.init)
+        
+        let sut = LocalFeedLoader(store: store, currentDate: { currentDate })
         trackForMemoryLeaks(store)
         trackForMemoryLeaks(sut)
         return sut
