@@ -61,18 +61,22 @@ extension LocalFeedLoader {
 }
 
 extension LocalFeedLoader {
-    public func validateCache() {
+    
+    public typealias ValidateResult = Result<Void, Error>
+    
+    public func validateCache(completion: @escaping (ValidateResult) -> Void) {
         store.retrieve { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .failure:
-                self.store.deleteCachedFeed { _ in }
+                self.store.deleteCachedFeed { _ in completion(.success(()))}
                 
             case let .success(.some(cachedFeed)) where
                     !FeedCachePolicy.validate(cachedFeed.timestamp, against: self.currentDate()):
-                self.store.deleteCachedFeed { _ in }
+                self.store.deleteCachedFeed(completion: completion)
                 
-            case .success: break
+            case .success:
+                completion(.success(()))
             }
         } 
     }
