@@ -216,7 +216,7 @@
 		E094E597252517BE00E3E501 /* ManagedFeedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedFeedImage.swift; sourceTree = "<group>"; };
 		E0A7FD3E25AB6F2E0026B651 /* RemoteFeedImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedImageDataLoader.swift; sourceTree = "<group>"; };
 		E0A7FD4525AB71A20026B651 /* LoadFeedImageDataFromRemoteUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadFeedImageDataFromRemoteUseCaseTests.swift; sourceTree = "<group>"; };
-		E0B262A7254AB76E00EA6721 /* FeedImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoader.swift; sourceTree = "<group>"; };
+		E0B262A7254AB76E00EA6721 /* FeedImageDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedImageDataLoader.swift; path = ../FeedImageDataLoader.swift; sourceTree = "<group>"; };
 		E0B262C1254ABDDB00EA6721 /* FeedImageCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageCellController.swift; sourceTree = "<group>"; };
 		E0B262CA254AC20F00EA6721 /* FeedUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIComposer.swift; sourceTree = "<group>"; };
 		E0D684A424C85F1500F71888 /* LocalFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFeedLoader.swift; sourceTree = "<group>"; };
@@ -366,7 +366,6 @@
 			isa = PBXGroup;
 			children = (
 				E0393AD3248A28D100AFA5A2 /* Info.plist */,
-				E0B262A7254AB76E00EA6721 /* FeedImageDataLoader.swift */,
 				E0D684A324C85F0400F71888 /* Feed Cache */,
 				E0393AED248A29EF00AFA5A2 /* Feed Feature */,
 				E0FC0C0524915CD70090C0AA /* Feed API */,
@@ -392,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				E0393AE9248A28DA00AFA5A2 /* FeedImage.swift */,
+				E0B262A7254AB76E00EA6721 /* FeedImageDataLoader.swift */,
 				E0393AEB248A294A00AFA5A2 /* FeedLoader.swift */,
 			);
 			path = "Feed Feature";
