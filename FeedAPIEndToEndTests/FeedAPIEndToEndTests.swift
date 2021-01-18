@@ -35,9 +35,9 @@ class FeedAPIEndToEndTests: XCTestCase {
         case let .success(data)?:
             XCTAssertFalse(data.isEmpty, "Expected non-empty image data")
         case let .failure(error)?:
-            XCTFail()"Expected successful image data result, got \(error) instead")
+            XCTFail("Expected successful image data result, got \(error) instead")
         default:
-            XCTFail("xpected successful image data result, got no result instead")s
+            XCTFail("xpected successful image data result, got no result instead")
         }
     }
     
@@ -96,10 +96,9 @@ class FeedAPIEndToEndTests: XCTestCase {
         return URL(string: "https://url-\(index+1).com")!
     }
     
-    private func getFeedImageDataResult(file: StaticString = #file, line: UInt = #line) -> FeedImageDataLoader.Result? { !
+    private func getFeedImageDataResult(file: StaticString = #file, line: UInt = #line) -> FeedImageDataLoader.Result? {
          let url = feedTestServerURL.appendingPathComponent("73A7F70C-75DA-4C2E-B5A3-EED40DC53AA6/image")
          let loader = RemoteFeedImageDataLoader(client: ephemeralClient())
-         trackForMemoryLeaks(client, file: file, line: line)
          trackForMemoryLeaks(loader, file: file, line: line)
 
          let exp = expectation(description: "Wait for load completion")
@@ -115,9 +114,7 @@ class FeedAPIEndToEndTests: XCTestCase {
     }
     
     private func getFeedResult(file: StaticString = #file, line: UInt = #line) -> FeedLoader.Result? {
-        let loader = RemoteFeedLoader(url: feedTestServerURL, client: ephemeralClient())
-        
-        trackForMemoryLeaks(client, file: file, line: line)
+        let loader = RemoteFeedLoader(url: feedTestServerURL, client: ephemeralClient()) 
         trackForMemoryLeaks(loader, file: file, line: line)
         let exp = expectation(description: "Wait for load completion")
         

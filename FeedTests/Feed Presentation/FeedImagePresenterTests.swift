@@ -6,7 +6,7 @@
 //  Copyright © 2021 Valentin Kalchev. All rights reserved.
 //
 
-import XCTest
+import XCTest 
 import Feed
 
 class FeedImagePresenterTests: XCTestCase {
@@ -15,66 +15,73 @@ class FeedImagePresenterTests: XCTestCase {
         XCTAssertTrue(view.messages.isEmpty, "Expect no view messages")
     }
     
-    func test_didStartLoadingImageData_imageLoadingWithDescriptionAndLocation() {
-        let (sut, view) = makeSUT()
-        let location = "some location"
-        let description = "some description"
-        let image = makeImage(description: description, location: location, url: anyURL())
-        sut.didStartLoadingImageData(for: image)
-        XCTAssertEqual(view.messages, [.display(FeedImageViewModel<UIImage>(
-                                                    description: "some description",
-                                                    location: "some location",
-                                                    image: nil,
-                                                    isLoading: true,
-                                                    shouldRetry: false))])
+    func test_didStartLoadingImageData_displaysLoadingImage() {
+         let (sut, view) = makeSUT()
+         let image = uniqueImage()
+
+         sut.didStartLoadingImageData(for: image)
+
+         let message = view.messages.first
+        
+         XCTAssertEqual(view.messages.count, 1)
+         XCTAssertEqual(message?.description, image.description)
+         XCTAssertEqual(message?.location, image.location)
+         XCTAssertEqual(message?.isLoading, true)
+         XCTAssertEqual(message?.shouldRetry, false)
+         XCTAssertNil(message?.image)
     }
     
-    func test_didFinishLoadingImageData_withValidData() {
-        let (sut, view) = makeSUT()
-        
-        let image = UIImage.make(withColor: .red)
-        let viewModel = FeedImageViewModel<UIImage>(description: "some description", location: "some location", image: image, isLoading: false, shouldRetry: false)
-        
-        let feedImage = makeImage(description: viewModel.description, location: viewModel.location, url: anyURL())
-        
-        sut.didFinishLoadingImageData(with: image.pngData()!, for: feedImage)
-        XCTAssertEqual(view.messages, [.display(viewModel)])
+    func test_didFinishLoadingImageData_displaysRetryOnFailedImageTransformation() {
+         let (sut, view) = makeSUT(imageTransformer: fail)
+         let image = uniqueImage()
+
+         sut.didFinishLoadingImageData(with: Data(), for: image)
+
+         let message = view.messages.first
+         XCTAssertEqual(view.messages.count, 1)
+         XCTAssertEqual(message?.description, image.description)
+         XCTAssertEqual(message?.location, image.location)
+         XCTAssertEqual(message?.isLoading, false)
+         XCTAssertEqual(message?.shouldRetry, true)
+         XCTAssertNil(message?.image)
     }
     
-    func test_didFinishLoadingImageData_retryOnInvalidData() {
-        let (sut, view) = makeSUT()
-        
-        let invalidImageData = "some data".data(using: .utf8)!
-        let location = "some location"
-        let description = "some description"
-        
-        let feedImage = makeImage(description: description,
-                                  location: location,
-                                  url: anyURL())
-        
-        sut.didFinishLoadingImageData(with: invalidImageData, for: feedImage)
-        XCTAssertEqual(view.messages, [.display(FeedImageViewModel<UIImage>(
-                                                    description: description,
-                                                    location: location,
-                                                    image: nil,
-                                                    isLoading: false,
-                                                    shouldRetry: true))])
+    func test_didFinishLoadingImageData_displaysImageOnSuccessfulTransformation() {
+         let image = uniqueImage() 
+         let transformedData = AnyImage()
+         let (sut, view) = makeSUT(imageTransformer: { _ in transformedData })
+
+         sut.didFinishLoadingImageData(with: Data(), for: image)
+
+         let message = view.messages.first
+         XCTAssertEqual(view.messages.count, 1)
+         XCTAssertEqual(message?.description, image.description)
+         XCTAssertEqual(message?.location, image.location)
+         XCTAssertEqual(message?.isLoading, false)
+         XCTAssertEqual(message?.shouldRetry, false)
+         XCTAssertEqual(message?.image, transformedData)
     }
     
-    func test_didFinishLoadingImageData_errorOnInvalidData() {
-        let (sut, view) = makeSUT()
-        let location = "some location"
-        let description = "some description"
-        
-        let feedImage = makeImage(description: description, location: location, url: anyURL())
-        sut.didFinishLoadingImageData(with: anyNSError(), for: feedImage)
-        XCTAssertEqual(view.messages, [.display(FeedImageViewModel<UIImage>(
-                                                    description: description,
-                                                    location: location,
-                                                    image: nil,
-                                                    isLoading: false,
-                                                    shouldRetry: true))])
+    func test_didFinishLoadingImageDataWithError_displaysRetry() {
+         let image = uniqueImage()
+         let (sut, view) = makeSUT()
+
+         sut.didFinishLoadingImageData(with: anyNSError(), for: image)
+
+         let message = view.messages.first
+         XCTAssertEqual(view.messages.count, 1)
+         XCTAssertEqual(message?.description, image.description)
+         XCTAssertEqual(message?.location, image.location)
+         XCTAssertEqual(message?.isLoading, false)
+         XCTAssertEqual(message?.shouldRetry, true)
+         XCTAssertNil(message?.image)
+     }
+    
+    private var fail:(Data) -> AnyImage? {
+        return { _ in nil }
     }
+    
+    private struct AnyImage: Equatable {}
     
     private func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
         return FeedImage(id: UUID(), description: description, location: location, url: url)
@@ -82,62 +89,25 @@ class FeedImagePresenterTests: XCTestCase {
     
     // MARK: - Helpers
     
-    private func makeSUT(file: StaticString = #file, line: UInt = #line) -> (sut: FeedImagePresenter<ViewSpy, UIImage>, ViewSpy) {
+    private func makeSUT(imageTransformer: @escaping (Data) -> AnyImage? = { _ in nil },
+                         file: StaticString = #file,
+                         line: UInt = #line) -> (sut: FeedImagePresenter<ViewSpy, AnyImage>, view: ViewSpy) {
         
         let view = ViewSpy()
-        let sut = FeedImagePresenter(view: view, imageTransformer: UIImage.init)
+        let sut = FeedImagePresenter(view: view, imageTransformer: imageTransformer)
         
         trackForMemoryLeaks(view, file: file, line: line)
         trackForMemoryLeaks(sut, file: file, line: line)
         
         return (sut, view)
-    }
+    } 
     
     private class ViewSpy: FeedImageView {
+        private(set) var messages = [FeedImageViewModel<AnyImage>]()
         
-        typealias Image = UIImage
-        
-        enum Message: Equatable {
-            static func == (lhs: FeedImagePresenterTests.ViewSpy.Message, rhs: FeedImagePresenterTests.ViewSpy.Message) -> Bool {
-                switch (lhs, rhs) {
-                case let (display(lhsm), display(rhsm)):
-                    if lhsm.description == rhsm.description &&
-                        lhsm.location == rhsm.location &&
-                        lhsm.image?.pngData() == rhsm.image?.pngData() &&
-                    lhsm.isLoading == rhsm.isLoading &&
-                        lhsm.shouldRetry == rhsm.shouldRetry {
-                         return true
-                    } else {
-                        return false
-                    }
-                }
-            }
-            
-            case display(FeedImageViewModel<UIImage>)
+        func display(_ model: FeedImageViewModel<AnyImage>) {
+            messages.append(model)
         }
-        
-        private(set) var messages: [Message] = []
-        
-        func display(_ model: FeedImageViewModel<UIImage>) {
-            messages.append(.display(FeedImageViewModel(description: model.description,
-                                                        location: model.location,
-                                                        image: model.image,
-                                                        isLoading: model.isLoading,
-                                                        shouldRetry: model.shouldRetry)))
-        }
-    }
-}
-
-extension UIImage {
-    static func make(withColor color: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()!
-        context.setFillColor(color.cgColor)
-        context.fill(rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
     }
 }
 
