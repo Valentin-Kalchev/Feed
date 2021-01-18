@@ -89,7 +89,7 @@ class FeedCacheIntegrationTests: XCTestCase {
             exp.fulfill()
         }
         
-        wait(for: [exp], timeout: 1.0)
+        wait(for: [exp], timeout: 2.0)
     }
     
     private func save(feed: [FeedImage], with sut: LocalFeedLoader, file: StaticString = #file, line: UInt = #line) {
@@ -101,6 +101,6 @@ class FeedCacheIntegrationTests: XCTestCase {
             
             saveExp.fulfill()
         }
-        wait(for: [saveExp], timeout: 1.0)
+        wait(for: [saveExp], timeout: 2.0)
     }
 }
