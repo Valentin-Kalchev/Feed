@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1200"
+   LastUpgradeVersion = "1230"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -28,9 +28,9 @@
             testExecutionOrdering = "random">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E01ED84224A9CF9B00348735"
-               BuildableName = "FeedAPIEndToEndTests.xctest"
-               BlueprintName = "FeedAPIEndToEndTests"
+               BlueprintIdentifier = "E0DF42C925265CFC00154BEA"
+               BuildableName = "FeedCacheIntegrationTests.xctest"
+               BlueprintName = "FeedCacheIntegrationTests"
                ReferencedContainer = "container:Feed.xcodeproj">
             </BuildableReference>
          </TestableReference>

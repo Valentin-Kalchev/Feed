@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1200"
+   LastUpgradeVersion = "1230"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -27,20 +27,18 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      enableThreadSanitizer = "YES"
-      codeCoverageEnabled = "YES">
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "E0393ACE248A28D100AFA5A2"
+            BuildableName = "Feed.framework"
+            BlueprintName = "Feed"
+            ReferencedContainer = "container:Feed.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E01ED84224A9CF9B00348735"
-               BuildableName = "FeedAPIEndToEndTests.xctest"
-               BlueprintName = "FeedAPIEndToEndTests"
-               ReferencedContainer = "container:Feed.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
          <TestableReference
             skipped = "NO"
             testExecutionOrdering = "random">
@@ -49,17 +47,6 @@
                BlueprintIdentifier = "E0393AD7248A28D100AFA5A2"
                BuildableName = "FeedTests.xctest"
                BlueprintName = "FeedTests"
-               ReferencedContainer = "container:Feed.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            testExecutionOrdering = "random">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E0DF42C925265CFC00154BEA"
-               BuildableName = "FeedCacheIntegrationTests.xctest"
-               BlueprintName = "FeedCacheIntegrationTests"
                ReferencedContainer = "container:Feed.xcodeproj">
             </BuildableReference>
          </TestableReference>
