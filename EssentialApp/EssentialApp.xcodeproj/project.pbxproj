@@ -18,6 +18,7 @@
 		E026F74C25B643F100F5EC87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E026F74B25B643F100F5EC87 /* Assets.xcassets */; };
 		E026F74F25B643F100F5EC87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E026F74D25B643F100F5EC87 /* LaunchScreen.storyboard */; };
 		E09C0E2025C82A17008825B1 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C0E1F25C82A17008825B1 /* FeedLoaderWithFallbackCompositeTests.swift */; };
+		E09C0E2825C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C0E2725C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		E026F75525B643F100F5EC87 /* EssentialAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E026F75B25B643F100F5EC87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E09C0E1F25C82A17008825B1 /* FeedLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
+		E09C0E2725C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				E026F74225B643ED00F5EC87 /* AppDelegate.swift */,
 				E026F74425B643ED00F5EC87 /* SceneDelegate.swift */,
 				E026F74625B643ED00F5EC87 /* ViewController.swift */,
+				E09C0E2725C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift */,
 				E026F74825B643ED00F5EC87 /* Main.storyboard */,
 				E026F74B25B643F100F5EC87 /* Assets.xcassets */,
 				E026F74D25B643F100F5EC87 /* LaunchScreen.storyboard */,
@@ -235,6 +238,7 @@
 			files = (
 				E026F74725B643ED00F5EC87 /* ViewController.swift in Sources */,
 				E026F74325B643ED00F5EC87 /* AppDelegate.swift in Sources */,
+				E09C0E2825C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift in Sources */,
 				E026F74525B643ED00F5EC87 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
