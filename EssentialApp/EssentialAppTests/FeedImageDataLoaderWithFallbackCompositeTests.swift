@@ -49,18 +49,35 @@ class FeedImageDataLoaderWithFallbackComposite: FeedImageDataLoader {
 class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
     func test_loadImageData_deliversPrimaryImageDataOnPrimaryLoaderSuccess() {
         let primaryData = uniqueImageData()
-        let primary = ImageDataLoaderStub(result: .success(primaryData))
-        let fallback = ImageDataLoaderStub(result: .success(uniqueImageData()))
-        let sut = FeedImageDataLoaderWithFallbackComposite(primary: primary, fallback: fallback)
+        let sut = makeSUT(primaryResult: .success(primaryData), fallbackResult: .success(uniqueImageData()))
+        expect(sut: sut, toCompleteWith: .success(primaryData))
+    }
+    
+    func test_loadImageData_deliversFallbackImageDataOnPrimaryFailure() {
         
+    }
+    
+    // MARK: - Helpers
+    
+    private func makeSUT(primaryResult: FeedImageDataLoader.Result, fallbackResult: FeedImageDataLoader.Result, file: StaticString = #file, line: UInt = #line) -> FeedImageDataLoader {
+        let primary = ImageDataLoaderStub(result: primaryResult)
+        let fallback = ImageDataLoaderStub(result: fallbackResult)
+        let sut = FeedImageDataLoaderWithFallbackComposite(primary: primary, fallback: fallback)
+        trackForMemoryLeak(primary, file: file, line: line)
+        trackForMemoryLeak(fallback, file: file, line: line)
+        trackForMemoryLeak(sut, file: file, line: line)
+        return sut
+    }
+    
+    private func expect(sut: FeedImageDataLoader, toCompleteWith expectedResult: FeedImageDataLoader.Result, file: StaticString = #file, line: UInt = #line) {
         let url = URL(string: "http://any-url.com")!
         let exp = expectation(description: "Wait for load image data")
-        _ = sut.loadImageData(from: url) { (result) in
-            switch result {
-            case let .success(receivedData):
-                XCTAssertEqual(primaryData, receivedData)
+        _ = sut.loadImageData(from: url) { (receivedResult) in
+            switch (expectedResult, receivedResult) {
+            case (let .success(expectedData), let .success(receivedData)):
+                XCTAssertEqual(expectedData, receivedData, file: file, line: line)
             default:
-                XCTFail("Expected \(primaryData), got \(result) instead")
+                XCTFail("Expected \(expectedResult), got \(receivedResult) instead", file: file, line: line)
             }
             
             exp.fulfill()
