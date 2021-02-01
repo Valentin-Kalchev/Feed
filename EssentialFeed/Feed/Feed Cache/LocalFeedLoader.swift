@@ -42,7 +42,6 @@ extension LocalFeedLoader {
 }
 
 extension LocalFeedLoader {
-    
     public typealias LoadResult = FeedLoader.Result
     public func load(completion: @escaping (LoadResult) -> Void) {
         store.retrieve { [weak self] result in
@@ -50,6 +49,7 @@ extension LocalFeedLoader {
             switch result {
             case let .failure(error):
                 completion(.failure(error))
+                
             case let .success(.some(cachedFeed)) where FeedCachePolicy.validate(cachedFeed.timestamp, against: self.currentDate()):
                 completion(.success(cachedFeed.feed.toModels()))
             
