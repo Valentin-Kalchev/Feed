@@ -19,6 +19,8 @@
 		E026F74F25B643F100F5EC87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E026F74D25B643F100F5EC87 /* LaunchScreen.storyboard */; };
 		E09C0E2025C82A17008825B1 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C0E1F25C82A17008825B1 /* FeedLoaderWithFallbackCompositeTests.swift */; };
 		E09C0E2825C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C0E2725C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift */; };
+		E09C0E2B25C8474A008825B1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C0E2A25C8474A008825B1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */; };
+		E09C0E2F25C84891008825B1 /* SharedTestsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C0E2E25C84891008825B1 /* SharedTestsHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		E026F75B25B643F100F5EC87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E09C0E1F25C82A17008825B1 /* FeedLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 		E09C0E2725C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
+		E09C0E2A25C8474A008825B1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
+		E09C0E2E25C84891008825B1 /* SharedTestsHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestsHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				E026F75B25B643F100F5EC87 /* Info.plist */,
+				E09C0E2E25C84891008825B1 /* SharedTestsHelpers.swift */,
 				E09C0E1F25C82A17008825B1 /* FeedLoaderWithFallbackCompositeTests.swift */,
+				E09C0E2A25C8474A008825B1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */,
 			);
 			path = EssentialAppTests;
 			sourceTree = "<group>";
@@ -247,6 +253,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E09C0E2F25C84891008825B1 /* SharedTestsHelpers.swift in Sources */,
+				E09C0E2B25C8474A008825B1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */,
 				E09C0E2025C82A17008825B1 /* FeedLoaderWithFallbackCompositeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
