@@ -1,5 +1,5 @@
 //
-//  LoaderSpy.swift
+//  FeedImageDataLoaderSpy.swift
 //  FeediOSTests
 //
 //  Created by Valentin Kalchev (Zuant) on 11/11/20.

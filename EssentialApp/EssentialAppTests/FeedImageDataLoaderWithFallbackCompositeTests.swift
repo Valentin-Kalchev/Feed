@@ -28,22 +28,22 @@ class ImageDataLoaderStub: FeedImageDataLoader {
     }
 }
 
-class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
+class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase, FeedImageDataLoaderTestCase {
     func test_loadImageData_deliversPrimaryImageDataOnPrimaryLoaderSuccess() {
         let primaryData = uniqueImageData()
         let sut = makeSUT(primaryResult: .success(primaryData), fallbackResult: .success(uniqueImageData()))
-        expect(sut: sut, toCompleteWith: .success(primaryData))
+        expect(sut: sut, toCompleteWith: .success(primaryData)) {}
     }
     
     func test_loadImageData_deliversFallbackImageDataOnPrimaryFailure() {
         let fallbackData = uniqueImageData()
         let sut = makeSUT(primaryResult: .failure(anyNSError()), fallbackResult: .success(fallbackData))
-        expect(sut: sut, toCompleteWith: .success(fallbackData))
+        expect(sut: sut, toCompleteWith: .success(fallbackData)) {}
     }
     
     func test_loadImageData_deliversErrorOnPrimaryAndFallbackImageDataFailure() {
         let sut = makeSUT(primaryResult: .failure(anyNSError()), fallbackResult: .failure(anyNSError()))
-        expect(sut: sut, toCompleteWith: .failure(anyNSError()))
+        expect(sut: sut, toCompleteWith: .failure(anyNSError())) {}
     }
     
     // MARK: - Helpers
@@ -56,27 +56,6 @@ class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase {
         trackForMemoryLeak(fallback, file: file, line: line)
         trackForMemoryLeak(sut, file: file, line: line)
         return sut
-    }
-    
-    private func expect(sut: FeedImageDataLoader, toCompleteWith expectedResult: FeedImageDataLoader.Result, file: StaticString = #file, line: UInt = #line) {
-        let url = URL(string: "http://any-url.com")!
-        let exp = expectation(description: "Wait for load image data")
-        _ = sut.loadImageData(from: url) { (receivedResult) in
-            switch (expectedResult, receivedResult) {
-            case (let .success(expectedData), let .success(receivedData)):
-                XCTAssertEqual(expectedData, receivedData, file: file, line: line)
-                
-            case (let .failure(expectedError), let .failure(receivedError)):
-                XCTAssertEqual(expectedError as NSError?, receivedError as NSError?, file: file, line: line)
-                
-            default:
-                XCTFail("Expected \(expectedResult), got \(receivedResult) instead", file: file, line: line)
-            }
-            
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1)
     }
     
     private func uniqueImageData() -> Data {
