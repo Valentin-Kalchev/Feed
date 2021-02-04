@@ -8,14 +8,25 @@
 import XCTest
 import Feed
 
+protocol FeedCache {
+    typealias Result = Swift.Result<Void, Error>
+    func save(_ feed: [FeedImage], completion: @escaping (Result) -> Void)
+}
+
 class FeedLoaderCacheDecorator: FeedLoader {
     private let decoratee: FeedLoader
-    init(decoratee: FeedLoader) {
+    private let cache: FeedCache
+    
+    init(decoratee: FeedLoader, cache: FeedCache) {
         self.decoratee = decoratee
+        self.cache = cache
     }
     
     func load(completion: @escaping (FeedLoader.Result) -> Void) {
-        decoratee.load(completion: completion)
+        decoratee.load { [weak self] (result) in
+            self?.cache.save((try? result.get()) ?? [], completion: { _ in })
+            completion(result)
+        }
     }
 }
 
@@ -32,13 +43,35 @@ class FeedLoaderCacheDecoratorTests: XCTestCase, FeedLoaderTestCase {
         expect(sut: sut, toCompleteWith: .failure(anyNSError()))
     }
     
+    func test_load_cachesLoadedFeedOnLoaderSuccess() {
+        let feed = uniqueFeed()
+        let cache = CacheSpy()
+        let sut = makeSUT(result: .success(feed), cache: cache)
+        sut.load(completion: { _ in })
+        
+        XCTAssertEqual(cache.messages, [.save(feed)])
+    }
+    
     // MARK: - Helpers
     
-    private func makeSUT(result: FeedLoader.Result, file: StaticString = #file, line: UInt = #line) -> FeedLoaderCacheDecorator {
+    private func makeSUT(result: FeedLoader.Result, cache: CacheSpy = CacheSpy(), file: StaticString = #file, line: UInt = #line) -> FeedLoaderCacheDecorator {
         let loader = FeedLoaderStub(result: result)
-        let sut = FeedLoaderCacheDecorator(decoratee: loader)
+        let sut = FeedLoaderCacheDecorator(decoratee: loader, cache: cache)
         trackForMemoryLeak(loader, file: file, line: line)
         trackForMemoryLeak(sut, file: file, line: line)
         return sut 
+    }
+    
+    private class CacheSpy: FeedCache {
+        private(set) var messages = [Message]()
+        
+        enum Message: Equatable {
+            case save([FeedImage])
+        }
+        
+        func save(_ feed: [FeedImage], completion: @escaping (FeedCache.Result) -> Void) {
+            messages.append(.save(feed))
+            completion(.success(()))
+        }
     }
 }
