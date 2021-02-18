@@ -9,7 +9,6 @@ import XCTest
 import Feed
 
 class FeedImageDataLoaderCacheDecorator: FeedImageDataLoader {
-    
     private let decoratee: FeedImageDataLoader
     private let cache: FeedImageDataCache
 

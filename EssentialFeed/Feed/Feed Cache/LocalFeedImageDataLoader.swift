@@ -42,7 +42,6 @@ extension LocalFeedImageDataLoader: FeedImageDataLoader {
     }
     
     public func loadImageData(from url: URL, completion: @escaping (FeedImageDataLoader.Result) -> Void) -> FeedImageDataLoaderTask {
-        
         let task = LoadImageDataTask(completion)
         store.retrieve(dataFromURL: url) { [weak self] result in
             guard self != nil else { return }
@@ -54,8 +53,8 @@ extension LocalFeedImageDataLoader: FeedImageDataLoader {
     }
 }
 
-extension LocalFeedImageDataLoader {
-    public typealias SaveResult = Result<Void, Swift.Error>
+extension LocalFeedImageDataLoader: FeedImageDataCache {
+    public typealias SaveResult = FeedImageDataCache.Result
     public enum SaveError: Error {
         case failed
     }
