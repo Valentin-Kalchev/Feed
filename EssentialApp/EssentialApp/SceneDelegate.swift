@@ -16,6 +16,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let _ = (scene as? UIWindowScene) else { return }
+    }
+    
+    
+/*
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let _ = (scene as? UIWindowScene) else { return }
         
         let url = URL(string: "https://static1.squarespace.com/static/5891c5b8d1758ec68ef5dbc2/t/5d1c78f21e661a0001ce7cfd/1562147059075/feed-case-study-v1-api-feed.json")!
         let session = URLSession(configuration: .ephemeral)
@@ -36,5 +42,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                                                     primary: localImageLoader,
                                                                     fallback: remoteFeedImageDataLoader))
     }
+ */
 }
 
