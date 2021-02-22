@@ -19,6 +19,13 @@ public final class FeedImageCell: UITableViewCell {
     
     var onRetry: (() -> Void)?
     
+    public override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.accessibilityIdentifier = "feed-image-cell"
+        feedImageView.accessibilityIdentifier = "feed-image-view"
+    }
+    
     @IBAction private func retryButtonTapped() {
         onRetry?()
     }
