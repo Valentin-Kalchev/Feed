@@ -26,10 +26,12 @@
 		E09C0E2825C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C0E2725C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift */; };
 		E09C0E2B25C8474A008825B1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C0E2A25C8474A008825B1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */; };
 		E09C0E2F25C84891008825B1 /* SharedTestsHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09C0E2E25C84891008825B1 /* SharedTestsHelpers.swift */; };
+		E0A694C425E3C4B60089A509 /* DebuggingSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A694C325E3C4B60089A509 /* DebuggingSceneDelegate.swift */; };
 		E0AB251D25CC01BA0086C205 /* FeedLoaderCacheDecoratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AB251C25CC01BA0086C205 /* FeedLoaderCacheDecoratorTests.swift */; };
 		E0AB252125CC045F0086C205 /* FeedLoaderStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AB252025CC045F0086C205 /* FeedLoaderStub.swift */; };
 		E0AB252425CC04CD0086C205 /* XCTest+FeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AB252325CC04CD0086C205 /* XCTest+FeedLoader.swift */; };
 		E0E41E5025DFDD52002D25FB /* EssentialAppUIAcceptanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E41E4F25DFDD52002D25FB /* EssentialAppUIAcceptanceTests.swift */; };
+		E0FB6E0225E4124700D88CAB /* FeedImageDataLoaderCacheDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0FB6E0125E4124700D88CAB /* FeedImageDataLoaderCacheDecorator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,12 +88,14 @@
 		E09C0E2725C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderWithFallbackComposite.swift; sourceTree = "<group>"; };
 		E09C0E2A25C8474A008825B1 /* FeedImageDataLoaderWithFallbackCompositeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderWithFallbackCompositeTests.swift; sourceTree = "<group>"; };
 		E09C0E2E25C84891008825B1 /* SharedTestsHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedTestsHelpers.swift; sourceTree = "<group>"; };
+		E0A694C325E3C4B60089A509 /* DebuggingSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebuggingSceneDelegate.swift; sourceTree = "<group>"; };
 		E0AB251C25CC01BA0086C205 /* FeedLoaderCacheDecoratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderCacheDecoratorTests.swift; sourceTree = "<group>"; };
 		E0AB252025CC045F0086C205 /* FeedLoaderStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLoaderStub.swift; sourceTree = "<group>"; };
 		E0AB252325CC04CD0086C205 /* XCTest+FeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTest+FeedLoader.swift"; sourceTree = "<group>"; };
 		E0E41E4D25DFDD52002D25FB /* EssentialAppUIAcceptanceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialAppUIAcceptanceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0E41E4F25DFDD52002D25FB /* EssentialAppUIAcceptanceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialAppUIAcceptanceTests.swift; sourceTree = "<group>"; };
 		E0E41E5125DFDD52002D25FB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E0FB6E0125E4124700D88CAB /* FeedImageDataLoaderCacheDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageDataLoaderCacheDecorator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,9 +151,11 @@
 			children = (
 				E026F74225B643ED00F5EC87 /* AppDelegate.swift */,
 				E026F74425B643ED00F5EC87 /* SceneDelegate.swift */,
+				E0A694C325E3C4B60089A509 /* DebuggingSceneDelegate.swift */,
 				E09C0E2725C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift */,
 				E06B85F225CC110D002C42BB /* FeedLoaderCacheDecorator.swift */,
 				E011432B25C8506E00BCE104 /* FeedImageDataLoaderWithFallbackComposite.swift */,
+				E0FB6E0125E4124700D88CAB /* FeedImageDataLoaderCacheDecorator.swift */,
 				E026F74B25B643F100F5EC87 /* Assets.xcassets */,
 				E011434225C854AE00BCE104 /* Main.storyboard */,
 				E026F74D25B643F100F5EC87 /* LaunchScreen.storyboard */,
@@ -335,9 +341,11 @@
 			files = (
 				E026F74325B643ED00F5EC87 /* AppDelegate.swift in Sources */,
 				E09C0E2825C846BC008825B1 /* FeedLoaderWithFallbackComposite.swift in Sources */,
+				E0A694C425E3C4B60089A509 /* DebuggingSceneDelegate.swift in Sources */,
 				E026F74525B643ED00F5EC87 /* SceneDelegate.swift in Sources */,
 				E06B85F325CC110D002C42BB /* FeedLoaderCacheDecorator.swift in Sources */,
 				E011432C25C8506E00BCE104 /* FeedImageDataLoaderWithFallbackComposite.swift in Sources */,
+				E0FB6E0225E4124700D88CAB /* FeedImageDataLoaderCacheDecorator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -521,6 +529,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkalchev.EssentialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -540,6 +549,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkalchev.EssentialApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -561,6 +571,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkalchev.EssentialAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -583,6 +594,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkalchev.EssentialAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -603,6 +615,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkalchev.EssentialAppUIAcceptanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -623,6 +636,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.vkalchev.EssentialAppUIAcceptanceTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
