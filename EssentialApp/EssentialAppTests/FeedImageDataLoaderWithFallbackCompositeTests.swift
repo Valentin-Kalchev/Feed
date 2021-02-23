@@ -52,9 +52,9 @@ class FeedImageDataLoaderWithFallbackCompositeTests: XCTestCase, FeedImageDataLo
         let primary = ImageDataLoaderStub(result: primaryResult)
         let fallback = ImageDataLoaderStub(result: fallbackResult)
         let sut = FeedImageDataLoaderWithFallbackComposite(primary: primary, fallback: fallback)
-        trackForMemoryLeak(primary, file: file, line: line)
-        trackForMemoryLeak(fallback, file: file, line: line)
-        trackForMemoryLeak(sut, file: file, line: line)
+        trackForMemoryLeaks(primary, file: file, line: line)
+        trackForMemoryLeaks(fallback, file: file, line: line)
+        trackForMemoryLeaks(sut, file: file, line: line)
         return sut
     }
     
