@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 import CoreData
 import Feed
 import FeediOS
@@ -40,19 +41,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         configureWindow()
     }
     
-    func configureWindow() {
-        let remoteURL = URL(string: "https://static1.squarespace.com/static/5891c5b8d1758ec68ef5dbc2/t/5db4155a4fbade21d17ecd28/1572083034355/essential_app_feed.json")!
-        let remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
+    func configureWindow() { 
         let remoteImageLoader = RemoteFeedImageDataLoader(client: httpClient)
         let localImageLoader = LocalFeedImageDataLoader(store: store)
         
         window?.rootViewController = UINavigationController(
             rootViewController: FeedUIComposer.feedComposedWith(
-                feedLoader: FeedLoaderWithFallbackComposite(
-                    primary: FeedLoaderCacheDecorator(
-                        decoratee: remoteFeedLoader,
-                        cache: localFeedLoader),
-                    fallback: localFeedLoader),
+                feedLoader: makeRemoteFeedLoaderWithLocalFallback,
             
                 imageLoader: FeedImageDataLoaderWithFallbackComposite(
                     primary: localImageLoader,
@@ -66,5 +61,45 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     func sceneWillResignActive(_ scene: UIScene) {
         localFeedLoader.validateCache(completion: { _ in })
+    }
+    
+    private func makeRemoteFeedLoaderWithLocalFallback() -> RemoteFeedLoader.Publisher {
+        let remoteURL = URL(string: "https://static1.squarespace.com/static/5891c5b8d1758ec68ef5dbc2/t/5db4155a4fbade21d17ecd28/1572083034355/essential_app_feed.json")!
+        let remoteFeedLoader = RemoteFeedLoader(url: remoteURL, client: httpClient)
+        return remoteFeedLoader
+            .loadPublisher()
+            .caching(to: localFeedLoader)
+            .fallback(to: localFeedLoader.loadPublisher)
+    }
+}
+
+extension FeedLoader {
+    public typealias Publisher = AnyPublisher<[FeedImage], Error>
+    
+    public func loadPublisher() -> AnyPublisher<[FeedImage], Swift.Error> {
+        Deferred {
+            Future(self.load)
+        }
+        .eraseToAnyPublisher()
+    }
+}
+
+extension Publisher where Output == [FeedImage] {
+    func caching(to cache: FeedCache) -> AnyPublisher<Output, Failure> {
+        handleEvents(receiveOutput: cache.saveIgnoringResult).eraseToAnyPublisher()
+    }
+}
+
+extension Publisher {
+    func fallback(to fallbackPublisher: @escaping () -> AnyPublisher<Output, Failure>) -> AnyPublisher<Output, Failure> {
+        self.catch { _ in
+            fallbackPublisher()
+        }.eraseToAnyPublisher()
+    }
+} 
+
+extension Publisher {
+    public func dispatchOnMainQueue() -> AnyPublisher<Output, Failure> {
+        receive(on: DispatchQueue.main).eraseToAnyPublisher()
     }
 }

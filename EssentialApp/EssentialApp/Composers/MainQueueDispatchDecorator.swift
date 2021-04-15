@@ -5,7 +5,7 @@
 //  Created by Valentin Kalchev (Zuant) on 26/11/20.
 //  Copyright © 2020 Valentin Kalchev. All rights reserved.
 //
-
+ 
 import Foundation
 import Feed
 
@@ -24,6 +24,7 @@ final class MainQueueDispatchDecorator<T> {
         completion()
     }
 }
+
 extension MainQueueDispatchDecorator: FeedLoader where T == FeedLoader {
     func load(completion: @escaping (FeedLoader.Result) -> Void) {
         decoratee.load { [weak self] (result) in
